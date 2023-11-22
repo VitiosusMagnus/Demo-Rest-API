@@ -6,10 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoRestApiApplication implements CommandLineRunner {
+public class DemoRestApiApplication {
 
-    @Autowired
-    TestRepository repo;
+
     public static void main(String[] args) {
         SpringApplication.run(DemoRestApiApplication.class, args);
 
@@ -17,11 +16,5 @@ public class DemoRestApiApplication implements CommandLineRunner {
     }
 
 
-    @Override
-    public void run(String... args) throws Exception {
-        TestEntity person = new TestEntity();
-        person.setId(Long.valueOf(1));
-        person.setName("Furkan");
-        repo.save(person);
-    }
+
 }
