@@ -1,6 +1,5 @@
 package com.vitiosusmagnus.demorestapi;
 
-import jdk.incubator.vector.VectorOperators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
