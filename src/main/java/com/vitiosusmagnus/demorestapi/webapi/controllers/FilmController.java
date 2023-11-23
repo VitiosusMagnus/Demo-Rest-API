@@ -16,12 +16,12 @@ public class FilmController {
         this.manager = manager;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Film getFilm(@PathVariable("id") long id){
         return manager.getById(id);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Film> getAll(){
         return manager.getAll();
     }
@@ -31,8 +31,13 @@ public class FilmController {
         manager.deleteById(id);
     }
 
-    @PostMapping
-    public Film create(@RequestBody Film film){
+    @PostMapping("{name},{description},{actors},{url}")
+    public Film create(@PathVariable("name") String name,@PathVariable("description") String description,@PathVariable("url")String url,@PathVariable("actors") String actors){
+        Film film = new Film();
+        film.setActors(actors);
+        film.setUrl(url);
+        film.setName(name);
+        film.setDescription(description);
         return manager.create(film);
     }
 
