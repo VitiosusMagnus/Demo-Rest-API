@@ -54,7 +54,7 @@ public class FilmManager implements FilmService {
         }
     }
 
-    private void updateRatingById(long id){
+    protected void updateRatingById(long id){
         Optional<Film> temp = repo.findById(id);
         if (temp.isPresent()){
             Film film = temp.get();
