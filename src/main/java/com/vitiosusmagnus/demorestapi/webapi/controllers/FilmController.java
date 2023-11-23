@@ -42,8 +42,8 @@ public class FilmController {
         return manager.create(film);
     }
 
-    @PutMapping("/{id},{name},{description},{actors},{url}")
-    public Film updateById(@PathVariable("id") long id,@PathVariable("name") String name,@PathVariable("description") String description,@PathVariable("url")String url,@PathVariable("actors") String actors){
-        return manager.updateById(id,name,description,url,actors);
+    @PutMapping("/{id}")
+    public Film updateById(@PathVariable long id, @RequestBody Film film) {
+        return manager.updateById(id,film);
     }
 }

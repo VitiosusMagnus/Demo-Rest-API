@@ -9,6 +9,6 @@ public interface FilmService {
      Film getById(Long id);
      Film create(Film film);
      void deleteById(Long id);
-     Film updateById(Long id, String name, String description, String url, String actors);
+     Film updateById(Long id,Film updatedFilm);
 
 }

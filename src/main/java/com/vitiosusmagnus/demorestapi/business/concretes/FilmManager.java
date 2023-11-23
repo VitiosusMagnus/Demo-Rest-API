@@ -38,16 +38,16 @@ public class FilmManager implements FilmService {
         repo.deleteById(id);
     }
 
-    @Override   //I'm not using Film object as reference because  i don't want mess reviews and rating
-    public Film updateById(Long id, String name, String description, String url, String actors) {
+    @Override
+    public Film updateById(Long id,Film updatedFilm) {
 
         Optional<Film> temp = repo.findById(id);
         if (temp.isPresent()){
             Film film = temp.get();
-            film.setName(name);
-            film.setDescription(description);
-            film.setUrl(url);
-            film.setActors(actors);
+            film.setName(updatedFilm.getName());
+            film.setDescription(updatedFilm.getDescription());
+            film.setUrl(updatedFilm.getUrl());
+            film.setActors(updatedFilm.getActors());
             return repo.save(film);
         }else {
             return null;
