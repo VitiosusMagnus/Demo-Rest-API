@@ -1,6 +1,7 @@
 package com.vitiosusmagnus.demorestapi.webapi.controllers;
 
 import com.vitiosusmagnus.demorestapi.business.concretes.FilmManager;
+import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +32,13 @@ public class FilmController {
         manager.deleteById(id);
     }
 
-    @PostMapping("{name},{description},{actors},{url}")
-    public Film create(@PathVariable("name") String name,@PathVariable("description") String description,@PathVariable("url")String url,@PathVariable("actors") String actors){
+    @PostMapping
+    public Film create(@RequestBody FilmRequest filmRequest){
         Film film = new Film();
-        film.setActors(actors);
-        film.setUrl(url);
-        film.setName(name);
-        film.setDescription(description);
+        film.setActors(filmRequest.getActors());
+        film.setUrl(filmRequest.getUrl());
+        film.setName(filmRequest.getName());
+        film.setDescription(filmRequest.getDescription());
         return manager.create(film);
     }
 
