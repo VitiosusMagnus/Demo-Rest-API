@@ -15,8 +15,6 @@ public class FilmManager implements FilmService {
     @Autowired
     private FilmRepository repo;
 
-    @Autowired
-    private ReviewManager reviewManager;
 
     @Override
     public List<Film> getAll() {
@@ -51,16 +49,6 @@ public class FilmManager implements FilmService {
             return repo.save(film);
         }else {
             return null;
-        }
-    }
-
-    protected void updateRatingById(long id){
-        Optional<Film> temp = repo.findById(id);
-        if (temp.isPresent()){
-            Film film = temp.get();
-            double rating = reviewManager.findAverageRatingByFilmId(id);
-            film.setRating(rating);
-            repo.save(film);
         }
     }
 
