@@ -20,10 +20,7 @@ public class ReviewManager implements ReviewService {
 
     @Autowired
     FilmRepository filmRepo;
-    @Override
-    public Double findAverageRatingByFilmId(long id) {
-        return reviewRepo.findAverageRatingByFilmId(id);
-    }
+
 
     @Override
     public Review getById(Long id) {
