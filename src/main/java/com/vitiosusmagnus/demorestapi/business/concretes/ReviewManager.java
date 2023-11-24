@@ -59,7 +59,7 @@ public class ReviewManager implements ReviewService {
 
     @Override
     public List<Review> findReviewByFilmId(Long id) {
-        return reviewRepo.findReviewByFilmId(id);
+        return reviewRepo.findReviewsByFilmId(id);
     }
 
     @Override
@@ -67,11 +67,11 @@ public class ReviewManager implements ReviewService {
         return reviewRepo.findAll();
     }
 
-    public void updateRatingById(Long id){
-        Optional<Film> temp = filmRepo.findById(id);
+    public void updateRatingById(Long filmId){
+        Optional<Film> temp = filmRepo.findById(filmId);
         if (temp.isPresent()){
             Film film = temp.get();
-            film.setRating(reviewRepo.findAverageRatingByFilmId(id));
+            film.setRating(reviewRepo.findAverageRatingByFilmId(filmId));
             filmRepo.save(film);
         }
     }
