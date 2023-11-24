@@ -22,14 +22,14 @@ public class ReviewController {
         return manager.getById(id);
     }
 
+    @GetMapping("/film{filmId}")
+    public List<Review> getReviewByFilmId(@PathVariable long filmId){
+        return manager.findReviewsByFilmId(filmId);
+    }
+
     @GetMapping
     public List<Review> getAll(){
         return manager.getAllReviews();
-    }
-
-    @GetMapping("/{filmId}")
-    public List<Review> getReviewByFilmId(@PathVariable long filmId){
-        return manager.findReviewsByFilmId(filmId);
     }
 
     @PostMapping("{filmId}")
