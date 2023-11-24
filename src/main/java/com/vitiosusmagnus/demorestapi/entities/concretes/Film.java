@@ -1,5 +1,6 @@
 package com.vitiosusmagnus.demorestapi.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Film {
     @Column(length = 1000, nullable = false)
     private String description;
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Review> reviews;
 
 
