@@ -1,6 +1,7 @@
 package com.vitiosusmagnus.demorestapi.business.concretes;
 
 import com.vitiosusmagnus.demorestapi.business.abstracts.ReviewService;
+import com.vitiosusmagnus.demorestapi.business.request.ReviewRequest;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.FilmRepository;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.ReviewRepository;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
@@ -31,10 +32,20 @@ public class ReviewManager implements ReviewService {
 
 
     @Override
-    public Review create(Review review) {
-        Review newReview = reviewRepo.save(review);
-        updateRatingById(review.getFilm().getId());
-        return newReview;
+    public Review create(long filmId, ReviewRequest reviewRequest) {
+        Review review = new Review();
+        review.setComment(reviewRequest.getComment());
+        review.setName(reviewRequest.getName());
+        review.setRating(reviewRequest.getRating());
+        Optional<Film> temp = filmRepo.findById(filmId);
+        if (temp.isPresent()){
+            Film film = temp.get();
+            review.setFilm(film);
+            updateRatingById(filmId);
+            return reviewRepo.save(review);
+        }else {
+            return null;
+        }
     }
 
     @Override

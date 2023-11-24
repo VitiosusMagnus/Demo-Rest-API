@@ -31,14 +31,9 @@ public class ReviewController {
         return manager.findReviewByFilmId(filmId);
     }
 
-    @PostMapping()
-    public Review create(@RequestBody ReviewRequest reviewRequest){
-        Review review = new Review();
-        review.setName(reviewRequest.getName());
-        review.setFilm(reviewRequest.getFilm());
-        review.setRating(reviewRequest.getRating());
-        review.setComment(reviewRequest.getComment());
-        return manager.create(review);
+    @PostMapping("{filmId}")
+    public Review create(@PathVariable long filmId, @RequestBody ReviewRequest reviewRequest){
+        return manager.create(filmId, reviewRequest);
     }
 
     @DeleteMapping("/{id}")
