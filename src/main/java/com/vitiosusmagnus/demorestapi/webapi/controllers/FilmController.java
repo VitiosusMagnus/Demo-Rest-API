@@ -34,12 +34,7 @@ public class FilmController {
 
     @PostMapping
     public Film create(@RequestBody FilmRequest filmRequest){
-        Film film = new Film();
-        film.setActors(filmRequest.getActors());
-        film.setUrl(filmRequest.getUrl());
-        film.setName(filmRequest.getName());
-        film.setDescription(filmRequest.getDescription());
-        return manager.create(film);
+        return manager.create(filmRequest);
     }
 
     @PutMapping("/{id}")

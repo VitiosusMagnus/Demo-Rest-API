@@ -1,6 +1,7 @@
 package com.vitiosusmagnus.demorestapi.business.concretes;
 
 import com.vitiosusmagnus.demorestapi.business.abstracts.FilmService;
+import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.FilmRepository;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,12 @@ public class FilmManager implements FilmService {
         return temp.orElse(null);
     }
     @Override
-    public Film create(Film film) {
+    public Film create(FilmRequest filmRequest) {
+        Film film = new Film();
+        film.setActors(filmRequest.getActors());
+        film.setUrl(filmRequest.getUrl());
+        film.setName(filmRequest.getName());
+        film.setDescription(filmRequest.getDescription());
         return repo.save(film);
     }
 
