@@ -1,5 +1,6 @@
 package com.vitiosusmagnus.demorestapi.webapi.controllers;
 
+import com.vitiosusmagnus.demorestapi.business.abstracts.FilmService;
 import com.vitiosusmagnus.demorestapi.business.concretes.FilmManager;
 import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
@@ -11,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/film")
 public class FilmController {
 
-    private FilmManager manager;
+    private FilmService manager;
 
     public FilmController(FilmManager manager) {
         this.manager = manager;

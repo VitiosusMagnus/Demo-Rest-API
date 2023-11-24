@@ -1,5 +1,6 @@
 package com.vitiosusmagnus.demorestapi.webapi.controllers;
 
+import com.vitiosusmagnus.demorestapi.business.abstracts.ReviewService;
 import com.vitiosusmagnus.demorestapi.business.concretes.ReviewManager;
 import com.vitiosusmagnus.demorestapi.business.request.ReviewRequest;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
@@ -10,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/review")
 public class ReviewController {
-    private ReviewManager manager;
+    private ReviewService manager;
 
     public ReviewController(ReviewManager manager){
         this.manager = manager;
