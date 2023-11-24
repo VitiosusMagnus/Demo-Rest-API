@@ -58,8 +58,8 @@ public class ReviewManager implements ReviewService {
     }
 
     @Override
-    public List<Review> findReviewByFilmId(Long id) {
-        return reviewRepo.findReviewsByFilmId(id);
+    public List<Review> findReviewsByFilmId(Long filmId) {
+        return reviewRepo.findReviewsByFilmId(filmId);
     }
 
     @Override

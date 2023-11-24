@@ -10,6 +10,6 @@ public interface ReviewService {
     Review getById(Long id);
     Review create(long filmId, ReviewRequest reviewRequest);
     void deleteById(Long id);
-    List<Review> findReviewByFilmId(Long id);
+    List<Review> findReviewsByFilmId(Long id);
     List<Review> getAllReviews();
 }

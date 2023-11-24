@@ -18,7 +18,7 @@ public class ReviewController {
     }
 
     @GetMapping("{id}")
-    public Review getReview(@PathVariable Long id){
+    public Review getReview(@PathVariable long id){
         return manager.getById(id);
     }
 
@@ -29,7 +29,7 @@ public class ReviewController {
 
     @GetMapping("/{filmId}")
     public List<Review> getReviewByFilmId(@PathVariable long filmId){
-        return manager.findReviewByFilmId(filmId);
+        return manager.findReviewsByFilmId(filmId);
     }
 
     @PostMapping("{filmId}")
