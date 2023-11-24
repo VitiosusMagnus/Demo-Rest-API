@@ -21,6 +21,11 @@ public class ReviewController {
         return manager.getById(id);
     }
 
+    @GetMapping
+    public List<Review> getAll(){
+        return manager.getAllReviews();
+    }
+
     @GetMapping("/{filmId}")
     public List<Review> getReviewByFilmId(@PathVariable long filmId){
         return manager.findReviewByFilmId(filmId);

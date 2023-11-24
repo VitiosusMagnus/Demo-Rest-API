@@ -11,4 +11,5 @@ public interface ReviewService {
     Review create(Review review);
     void deleteById(Long id);
     List<Review> findReviewByFilmId(Long id);
+    List<Review> getAllReviews();
 }

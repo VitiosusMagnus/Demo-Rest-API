@@ -14,6 +14,7 @@ import java.util.Optional;
 @Service
 public class ReviewManager implements ReviewService {
 
+
     @Autowired
     ReviewRepository reviewRepo;
 
@@ -29,6 +30,8 @@ public class ReviewManager implements ReviewService {
         Optional<Review> temp = reviewRepo.findById(id);
         return temp.orElseThrow();
     }
+
+
 
     @Override
     public Review create(Review review) {
@@ -49,6 +52,11 @@ public class ReviewManager implements ReviewService {
     @Override
     public List<Review> findReviewByFilmId(Long id) {
         return reviewRepo.findReviewByFilmId(id);
+    }
+
+    @Override
+    public List<Review> getAllReviews() {
+        return reviewRepo.findAll();
     }
 
     public void updateRatingById(Long id){
