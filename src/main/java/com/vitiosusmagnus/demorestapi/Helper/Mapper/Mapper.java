@@ -19,7 +19,6 @@ public class Mapper {
         filmResponse.setActors(film.getActors());
         filmResponse.setRating(film.getRating());
         filmResponse.setDescription(film.getDescription());
-        filmResponse.setReviews(film.getReviews());
         return filmResponse;
     }
 
@@ -33,7 +32,6 @@ public class Mapper {
             filmResponse.setActors(film.getActors());
             filmResponse.setRating(film.getRating());
             filmResponse.setDescription(film.getDescription());
-            filmResponse.setReviews(film.getReviews());
             filmResponses.add(filmResponse);
         }
         return filmResponses;

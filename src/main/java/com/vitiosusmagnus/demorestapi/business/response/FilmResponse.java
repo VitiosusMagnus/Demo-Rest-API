@@ -1,11 +1,9 @@
 package com.vitiosusmagnus.demorestapi.business.response;
 
-import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +15,4 @@ public class FilmResponse {
     private String actors;
     private double rating;
     private String description;
-    private List<Review> reviews;
-
 }
