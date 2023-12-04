@@ -5,6 +5,7 @@ import com.vitiosusmagnus.demorestapi.business.concretes.FilmManager;
 import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
 import com.vitiosusmagnus.demorestapi.business.response.FilmResponse;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,12 +36,12 @@ public class FilmController {
     }
 
     @PostMapping
-    public Film create(@RequestBody FilmRequest filmRequest){
+    public Film create(@Valid @RequestBody FilmRequest filmRequest){
         return manager.create(filmRequest);
     }
 
     @PutMapping("/{id}")
-    public Film updateById(@PathVariable long id, @RequestBody Film film) {
+    public Film updateById(@PathVariable long id,@Valid @RequestBody Film film) {
         return manager.updateById(id,film);
     }
 }

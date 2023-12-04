@@ -4,6 +4,7 @@ import com.vitiosusmagnus.demorestapi.business.abstracts.ReviewService;
 import com.vitiosusmagnus.demorestapi.business.concretes.ReviewManager;
 import com.vitiosusmagnus.demorestapi.business.request.ReviewRequest;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class ReviewController {
     }
 
     @PostMapping("{filmId}")
-    public Review create(@PathVariable long filmId, @RequestBody ReviewRequest reviewRequest){
+    public Review create(@PathVariable long filmId, @Valid @RequestBody ReviewRequest reviewRequest){
         return manager.create(filmId, reviewRequest);
     }
 
