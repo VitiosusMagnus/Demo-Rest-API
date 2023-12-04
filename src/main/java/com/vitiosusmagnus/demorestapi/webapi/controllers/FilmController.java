@@ -3,6 +3,7 @@ package com.vitiosusmagnus.demorestapi.webapi.controllers;
 import com.vitiosusmagnus.demorestapi.business.abstracts.FilmService;
 import com.vitiosusmagnus.demorestapi.business.concretes.FilmManager;
 import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
+import com.vitiosusmagnus.demorestapi.business.response.FilmResponse;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class FilmController {
     }
 
     @GetMapping
-    public List<Film> getAll(){
+    public List<FilmResponse> getAll(){
         return manager.getAll();
     }
 

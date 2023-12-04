@@ -1,7 +1,9 @@
 package com.vitiosusmagnus.demorestapi.business.concretes;
 
+import com.vitiosusmagnus.demorestapi.Helper.Mapper.Mapper;
 import com.vitiosusmagnus.demorestapi.business.abstracts.FilmService;
 import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
+import com.vitiosusmagnus.demorestapi.business.response.FilmResponse;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.FilmRepository;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,12 @@ public class FilmManager implements FilmService {
 
     @Autowired
     private FilmRepository repo;
-
+    @Autowired
+    private Mapper mapper;
 
     @Override
-    public List<Film> getAll() {
-        return repo.findAll();
+    public List<FilmResponse> getAll() {
+       return mapper.filmsToResponses(repo.findAll());
     }
 
     @Override
