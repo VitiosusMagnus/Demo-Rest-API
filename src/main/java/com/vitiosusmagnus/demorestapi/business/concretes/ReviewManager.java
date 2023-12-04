@@ -71,7 +71,7 @@ public class ReviewManager implements ReviewService {
         Optional<Film> temp = filmRepo.findById(filmId);
         if (temp.isPresent()){
             Film film = temp.get();
-            film.setRating(Math.floor(reviewRepo.findAverageRatingByFilmId(filmId) * 100) / 100);
+            film.setRating(Math.floor(reviewRepo.findAverageRatingByFilmId(filmId) * 10) / 10);
             filmRepo.save(film);
         }
     }
