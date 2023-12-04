@@ -2,11 +2,20 @@ package com.vitiosusmagnus.demorestapi.Helper.Mapper;
 
 import com.vitiosusmagnus.demorestapi.business.response.FilmResponse;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Service
 public class Mapper {
+
 
     public FilmResponse filmToResponse(Film film) {
         FilmResponse filmResponse = new FilmResponse();
