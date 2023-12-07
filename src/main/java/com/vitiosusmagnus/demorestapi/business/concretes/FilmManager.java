@@ -15,10 +15,13 @@ import java.util.Optional;
 @Service
 public class FilmManager implements FilmService {
 
-    @Autowired
-    private FilmRepository repo;
-    @Autowired
-    private Mapper mapper;
+    private final FilmRepository repo;
+    private final Mapper mapper;
+
+    public FilmManager(FilmRepository repo, Mapper mapper) {
+        this.repo = repo;
+        this.mapper = mapper;
+    }
 
     @Override
     public List<FilmResponse> getAll() {

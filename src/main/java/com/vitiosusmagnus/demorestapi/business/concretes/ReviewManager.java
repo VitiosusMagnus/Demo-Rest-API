@@ -6,7 +6,6 @@ import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.FilmRepository;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.ReviewRepository;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +15,16 @@ import java.util.Optional;
 public class ReviewManager implements ReviewService {
 
 
-    @Autowired
-    ReviewRepository reviewRepo;
 
-    @Autowired
-    FilmRepository filmRepo;
+    private ReviewRepository reviewRepo;
+
+
+    private FilmRepository filmRepo;
+
+    public ReviewManager(ReviewRepository reviewRepo, FilmRepository filmRepo) {
+        this.reviewRepo = reviewRepo;
+        this.filmRepo = filmRepo;
+    }
 
 
     @Override
