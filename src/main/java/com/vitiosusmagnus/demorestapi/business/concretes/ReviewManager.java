@@ -15,9 +15,9 @@ import java.util.Optional;
 
 @Service
 public class ReviewManager implements ReviewService {
-    private ReviewRepository reviewRepo;
-    private FilmRepository filmRepo;
-    private Mapper mapper;
+    private final ReviewRepository reviewRepo;
+    private final FilmRepository filmRepo;
+    private final Mapper mapper;
     public ReviewManager(ReviewRepository reviewRepo, FilmRepository filmRepo, Mapper mapper) {
         this.reviewRepo = reviewRepo;
         this.filmRepo = filmRepo;
@@ -28,9 +28,7 @@ public class ReviewManager implements ReviewService {
     @Override
     public ReviewResponse getById(Long id) {
         Optional<Review> temp = reviewRepo.findById(id);
-        if (temp.isPresent()){
-            return mapper.reviewToResponse(temp.get());
-        }else return null;
+        return temp.map(mapper::reviewToResponse).orElse(null);
     }
 
     @Override
@@ -54,9 +52,7 @@ public class ReviewManager implements ReviewService {
     public void deleteById(Long id) {
         Optional<Review> temp = reviewRepo.findById(id);
         reviewRepo.deleteById(id);
-        if (temp.isPresent()){
-            updateRatingById(temp.get().getFilm().getId());
-        }
+        temp.ifPresent(review -> updateRatingById(review.getFilm().getId()));
     }
 
     @Override
