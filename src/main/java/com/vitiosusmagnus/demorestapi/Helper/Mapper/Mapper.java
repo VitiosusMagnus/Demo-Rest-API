@@ -7,6 +7,7 @@ import com.vitiosusmagnus.demorestapi.business.response.ReviewResponse;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -15,13 +16,15 @@ public class Mapper {
     private final ModelMapper mapper;
 
 
-    public Mapper(ModelMapper mapper) {
+    public Mapper() {
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         this.mapper = mapper;
     }
 
-    public ReviewRequest reviewToRequest(Review review){
-        return mapper.map(review,ReviewRequest.class);
-    }
+//    public ReviewRequest reviewToRequest(Review review){
+//        return mapper.map(review,ReviewRequest.class);
+//    }
     public Review requestToReview(ReviewRequest reviewRequest){
         return mapper.map(reviewRequest,Review.class);
     }
