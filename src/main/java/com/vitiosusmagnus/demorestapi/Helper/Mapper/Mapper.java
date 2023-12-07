@@ -1,41 +1,57 @@
 package com.vitiosusmagnus.demorestapi.Helper.Mapper;
 
+import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
+import com.vitiosusmagnus.demorestapi.business.request.ReviewRequest;
 import com.vitiosusmagnus.demorestapi.business.response.FilmResponse;
+import com.vitiosusmagnus.demorestapi.business.response.ReviewResponse;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
-
+import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class Mapper {
+    private final ModelMapper mapper;
 
 
-    public FilmResponse filmToResponse(Film film) {
-        FilmResponse filmResponse = new FilmResponse();
-        filmResponse.setId(film.getId());
-        filmResponse.setName(film.getName());
-        filmResponse.setUrl(film.getUrl());
-        filmResponse.setActors(film.getActors());
-        filmResponse.setRating(film.getRating());
-        filmResponse.setDescription(film.getDescription());
-        return filmResponse;
+    public Mapper(ModelMapper mapper) {
+        this.mapper = mapper;
     }
 
-    public List<FilmResponse> filmsToResponses(List<Film> films) {
-        List<FilmResponse> filmResponses = new ArrayList<>();
-        for (Film film: films){
-            FilmResponse filmResponse = new FilmResponse();
-            filmResponse.setId(film.getId());
-            filmResponse.setName(film.getName());
-            filmResponse.setUrl(film.getUrl());
-            filmResponse.setActors(film.getActors());
-            filmResponse.setRating(film.getRating());
-            filmResponse.setDescription(film.getDescription());
-            filmResponses.add(filmResponse);
-        }
-        return filmResponses;
+    public ReviewRequest reviewToRequest(Review review){
+        return mapper.map(review,ReviewRequest.class);
+    }
+    public Review requestToReview(ReviewRequest reviewRequest){
+        return mapper.map(reviewRequest,Review.class);
+    }
+    public ReviewResponse reviewToResponse(Review review){
+        return mapper.map(review,ReviewResponse.class);
+    }
+    public List<ReviewResponse> reviewsToResponses(List<Review> reviews){
+        return reviews.stream().map(review -> mapper.map(review,ReviewResponse.class)).toList();
     }
 
 
+
+    //films
+    public FilmResponse filmToGetResponse(Film film){
+        return mapper.map(film, FilmResponse.class);
+    }
+    public Film createRequestToFilm(FilmRequest filmRequest){
+        return mapper.map(filmRequest,Film.class);
+    }
+    public FilmRequest filmToCreateRequest(Film film){
+        return mapper.map(film,FilmRequest.class);
+    }
+    public List<FilmResponse> filmsToGetResponses(List<Film> films) {
+        return films.stream().map(film -> mapper.map(film,FilmResponse.class)).toList();
+    }
+    public Film updateRequestToFilm(Film film, FilmRequest filmRequest){
+          Film newFilm = mapper.map(filmRequest, Film.class);
+         newFilm.setId(film.getId());
+         newFilm.setRating(film.getRating());
+         newFilm.setReviews(film.getReviews());
+         return newFilm;
+    }
 }

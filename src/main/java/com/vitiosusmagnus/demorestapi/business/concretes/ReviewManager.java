@@ -1,7 +1,9 @@
 package com.vitiosusmagnus.demorestapi.business.concretes;
 
+import com.vitiosusmagnus.demorestapi.Helper.Mapper.Mapper;
 import com.vitiosusmagnus.demorestapi.business.abstracts.ReviewService;
 import com.vitiosusmagnus.demorestapi.business.request.ReviewRequest;
+import com.vitiosusmagnus.demorestapi.business.response.ReviewResponse;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.FilmRepository;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.ReviewRepository;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
@@ -13,43 +15,39 @@ import java.util.Optional;
 
 @Service
 public class ReviewManager implements ReviewService {
-
-
-
     private ReviewRepository reviewRepo;
-
-
     private FilmRepository filmRepo;
-
-    public ReviewManager(ReviewRepository reviewRepo, FilmRepository filmRepo) {
+    private Mapper mapper;
+    public ReviewManager(ReviewRepository reviewRepo, FilmRepository filmRepo, Mapper mapper) {
         this.reviewRepo = reviewRepo;
         this.filmRepo = filmRepo;
+        this.mapper = mapper;
     }
 
 
     @Override
-    public Review getById(Long id) {
+    public ReviewResponse getById(Long id) {
         Optional<Review> temp = reviewRepo.findById(id);
-        return temp.orElseThrow();
+        if (temp.isPresent()){
+            return mapper.reviewToResponse(temp.get());
+        }else return null;
     }
 
-
+    @Override
+    public List<ReviewResponse> getAllReviews() {
+        return mapper.reviewsToResponses(reviewRepo.findAll());
+    }
 
     @Override
-    public Review create(long filmId, ReviewRequest reviewRequest) {
-        Review review = new Review();
-        review.setComment(reviewRequest.getComment());
-        review.setName(reviewRequest.getName());
-        review.setRating(reviewRequest.getRating());
+    public ReviewResponse create(long filmId, ReviewRequest reviewRequest) {
         Optional<Film> temp = filmRepo.findById(filmId);
         if (temp.isPresent()){
-            Film film = temp.get();
-            review.setFilm(film);
+            Review review = mapper.requestToReview(reviewRequest);
+            review.setFilm(temp.get());
+            review = reviewRepo.save(review);
             updateRatingById(filmId);
-            return reviewRepo.save(review);
-        }else {
-            return null;
-        }
+            return mapper.reviewToResponse(review);
+        }else return null;
     }
 
     @Override
@@ -62,13 +60,8 @@ public class ReviewManager implements ReviewService {
     }
 
     @Override
-    public List<Review> findReviewsByFilmId(Long filmId) {
-        return reviewRepo.findReviewsByFilmId(filmId);
-    }
-
-    @Override
-    public List<Review> getAllReviews() {
-        return reviewRepo.findAll();
+    public List<ReviewResponse> findReviewsByFilmId(Long filmId) {
+        return mapper.reviewsToResponses(reviewRepo.findReviewsByFilmId(filmId));
     }
 
     public void updateRatingById(Long filmId){

@@ -17,6 +17,7 @@ public class FilmManager implements FilmService {
     private final FilmRepository repo;
     private final Mapper mapper;
 
+
     public FilmManager(FilmRepository repo, Mapper mapper) {
         this.repo = repo;
         this.mapper = mapper;
@@ -24,22 +25,19 @@ public class FilmManager implements FilmService {
 
     @Override
     public List<FilmResponse> getAll() {
-       return mapper.filmsToResponses(repo.findAll());
+       return mapper.filmsToGetResponses(repo.findAll());
     }
 
     @Override
-    public Film getById(Long id) {
+    public FilmResponse getById(Long id) {
         Optional<Film> temp = repo.findById(id);
-        return temp.orElse(null);
+        return temp.map(mapper::filmToGetResponse).orElse(null);
     }
     @Override
-    public Film create(FilmRequest filmRequest) {
-        Film film = new Film();
-        film.setActors(filmRequest.getActors());
-        film.setUrl(filmRequest.getUrl());
-        film.setName(filmRequest.getName());
-        film.setDescription(filmRequest.getDescription());
-        return repo.save(film);
+    public FilmRequest create(FilmRequest filmRequest) {
+        Film film = mapper.createRequestToFilm(filmRequest);
+        film = repo.save(film);
+        return mapper.filmToCreateRequest(film);
     }
 
     @Override
@@ -48,16 +46,13 @@ public class FilmManager implements FilmService {
     }
 
     @Override
-    public Film updateById(Long id,Film updatedFilm) {
+    public FilmResponse updateById(Long id,FilmRequest updatedFilm) {
 
         Optional<Film> temp = repo.findById(id);
         if (temp.isPresent()){
-            Film film = temp.get();
-            film.setName(updatedFilm.getName());
-            film.setDescription(updatedFilm.getDescription());
-            film.setUrl(updatedFilm.getUrl());
-            film.setActors(updatedFilm.getActors());
-            return repo.save(film);
+            Film film = mapper.updateRequestToFilm(temp.get(),updatedFilm);
+            film = repo.save(film);
+            return mapper.filmToGetResponse(film);
         }else {
             return null;
         }

@@ -3,7 +3,7 @@ package com.vitiosusmagnus.demorestapi.webapi.controllers;
 import com.vitiosusmagnus.demorestapi.business.abstracts.ReviewService;
 import com.vitiosusmagnus.demorestapi.business.concretes.ReviewManager;
 import com.vitiosusmagnus.demorestapi.business.request.ReviewRequest;
-import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
+import com.vitiosusmagnus.demorestapi.business.response.ReviewResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,29 +12,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/review")
 public class ReviewController {
-    private ReviewService manager;
+    private final ReviewService manager;
 
     public ReviewController(ReviewManager manager){
         this.manager = manager;
     }
 
     @GetMapping("{id}")
-    public Review getReview(@PathVariable long id){
+    public ReviewResponse getReview(@PathVariable long id){
         return manager.getById(id);
     }
 
     @GetMapping("/film{filmId}")
-    public List<Review> getReviewByFilmId(@PathVariable long filmId){
+    public List<ReviewResponse> getReviewByFilmId(@PathVariable long filmId){
         return manager.findReviewsByFilmId(filmId);
     }
 
     @GetMapping
-    public List<Review> getAll(){
+    public List<ReviewResponse> getAll(){
         return manager.getAllReviews();
     }
 
     @PostMapping("{filmId}")
-    public Review create(@PathVariable long filmId, @Valid @RequestBody ReviewRequest reviewRequest){
+    public ReviewResponse create(@PathVariable long filmId, @Valid @RequestBody ReviewRequest reviewRequest){
         return manager.create(filmId, reviewRequest);
     }
 

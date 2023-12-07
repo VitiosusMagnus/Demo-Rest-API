@@ -2,14 +2,14 @@ package com.vitiosusmagnus.demorestapi.business.abstracts;
 
 
 import com.vitiosusmagnus.demorestapi.business.request.ReviewRequest;
-import com.vitiosusmagnus.demorestapi.entities.concretes.Review;
+import com.vitiosusmagnus.demorestapi.business.response.ReviewResponse;
 
 import java.util.List;
 
 public interface ReviewService {
-    Review getById(Long id);
-    Review create(long filmId, ReviewRequest reviewRequest);
+    ReviewResponse getById(Long id);
+    ReviewResponse create(long filmId, ReviewRequest reviewRequest);
     void deleteById(Long id);
-    List<Review> findReviewsByFilmId(Long id);
-    List<Review> getAllReviews();
+    List<ReviewResponse> findReviewsByFilmId(Long id);
+    List<ReviewResponse> getAllReviews();
 }
