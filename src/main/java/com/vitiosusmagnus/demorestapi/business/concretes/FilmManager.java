@@ -6,7 +6,6 @@ import com.vitiosusmagnus.demorestapi.business.request.FilmRequest;
 import com.vitiosusmagnus.demorestapi.business.response.FilmResponse;
 import com.vitiosusmagnus.demorestapi.dataaccess.abstracts.FilmRepository;
 import com.vitiosusmagnus.demorestapi.entities.concretes.Film;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
